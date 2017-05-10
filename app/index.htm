@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+
+<title>Strażnik Murków by Shadzio</title>
+<link rel='stylesheet' href='style.css' type='text/css'>
+<link rel='stylesheet' href='assets/jquery-ui.min.css' type='text/css'>
+<link rel='stylesheet' href='assets/bootstrap.min.css' type='text/css'>
+<link rel='stylesheet' href='assets/bootstrap-theme.min.css' type='text/css'>
+<script src='assets/jquery-3.2.0.min.js'></script>
+<script src='assets/bootstrap.min.js'></script>
+<script src='assets/jquery-ui.min.js'></script>
+
+<script src='runtime/Config.js'></script>
+<script src='runtime/Utils.js'></script>
+<script src='runtime/AJAX.js'></script>
+<script src='runtime/VillageDatabase.js'></script>
+<script src='runtime/VillageInfoModel.js'></script>
+<script src='runtime/VillageInfoView.js'></script>
+<script src='runtime/TWStatsUpdateStrategy.js'></script>
+<script src='runtime/GuestAccessUpdateStrategy.js'></script>
+<script src='runtime/VillageInfoUpdater.js'></script>
+<script src='runtime/SessionManager.js'></script>
+<script src='runtime/PredictionEngine.js'></script>
+<script src='runtime/Main.js'></script>
+
+<div id='slide_no_villages' class='slide slide-color-A'>
+    <div class='slide-inner vertical-center'>
+        <h1>:(</h1>
+        <br>
+        <b>Nie masz ustawionych żadnych wiosek do obserwowania.</b>
+        <br><br>
+        <button class='btn btn-primary no-outline jx-btn'
+                onclick='transition("#slide_no_villages", "#slide_add_villages")'>
+            Dodaj wioski
+        </button> &nbsp;
+        <button class='btn btn-info no-outline jx-btn'
+                onclick='SessionManager.load(); transition("#slide_no_villages", "#slide_loader", start)'>
+            Przywróć poprzednią sesję
+        </button>
+    </div>
+</div>
+
+<div id='slide_add_villages' class='slide slide-color-A slide-default-hidden'>
+    <div class='slide-inner vertical-center'>
+        <h3>Utwórz nową sesję</h3>
+        <br>
+        <textarea
+            placeholder='Lista wiosek, jedna na linię. Dozwolony dowolny format zawierający koordynaty.'
+            class='form-control jx-textarea'
+            style='width: 85%; resize: none; height: 100px; margin: 0 auto 0 auto; text-align: center'
+            id='init-village-list'
+        ></textarea>
+        <br>
+        Od którego czasu aplikacja ma analizować spadki punktów?
+        <br><br>
+        <select class='form-control' id='init-start-date' style='width: 85%; margin: 0 auto 0 auto'>
+            <option value='1'>Od początku dnia</option>
+            <option value='0'>Od tego momentu</option>
+        </select>
+        <br><br>
+        <button class='btn btn-success no-outline jx-btn'
+                onclick='SessionManager.createNew(); transition("#slide_add_villages", "#slide_loader", start)'>
+            Utwórz nową sesję
+        </button> &nbsp;
+        <button class='btn btn-primary no-outline jx-btn'
+                onclick='transition("#slide_add_villages", "#slide_no_villages")'>
+            Anuluj
+        </button>
+    </div>
+</div>
+
+<div id='slide_loader' class='slide slide-color-A slide-default-hidden'>
+    <div class='slide-inner vertical-center'>
+        <br>
+        <img src='assets/loading.svg' alt='Ładowanie'>
+        <br><br>
+        <i id='loader-text'>Czekaj, pobieranie listy wiosek...</i>
+    </div>
+</div>
+
+<div id='slide_main' class='slide slide-color-B slide-default-hidden'>
+    <div id='main_topbar'>
+        <b id='version-string'>Strażnik Murków</b>
+    </div>
+</div>
+
+<div id='slide_error' class='slide slide-color-A slide-default-hidden'>
+    <div class='slide-inner vertical-center'>
+        <h1>:(</h1>
+        <br>
+        <b id='error-message'>Wystąpił nieokreślony błąd.</b>
+        <br><br>
+        <button class='btn btn-default no-outline jx-btn'
+                onclick='transition("#slide_error", "#slide_add_villages")'>
+            Powrót
+        </button>
+    </div>
+</div>
+
+<div id='dialog_correct' title='Popraw dane o wiosce' style='display: none; text-align: center'>
+    <br>
+    <p>Wpisz tutaj obecny stan wioski, a program weźmie go pod uwagę.</p>
+    <br>
+    <input type='text' class='form-control control-inline control-narrow' placeholder='Poziom muru' id='correct_wall'><br>
+    <input type='text' class='form-control control-inline control-narrow' placeholder='Poziom kuźni' id='correct_smithy'><br>
+    <input type='text' class='form-control control-inline control-narrow' placeholder='Poziom zagrody' id='correct_farm'><br>
+    <br>
+    <button class='btn btn-success no-outline jx-btn control-inline'
+            onclick='villageAcceptCorrection()'>
+        Ustaw poziomy budynków
+    </button>
+</div>

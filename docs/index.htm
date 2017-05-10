@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<title>Strażnik Murków</title>
+<style>
+body {
+    text-align: center;
+    font-family: verdana, sans-serif;
+    font-size: 12px;
+    min-width: 800px;
+    max-width: 1000px;
+    margin: 0 auto 0 auto;
+}
+ul {
+    list-style-type: none;
+}
+li::before {
+    content: "\2022\00a0\00a0";
+}
+img {
+    margin: 10px;
+}
+</style>
+
+<h1>Strażnik Murków</h1>
+<h2>&raquo; Zawsze wie które wioski są czyste. Zobacz jak to zrobił &laquo;</h2>
+
+<p>Ten głupi noob znowu nie podzielił Ci komend? Czekasz, aż wioska będzie czysta? A może chcesz zawsze wiedzieć, czy wioski sojusznika nie padają?</p>
+
+<p><i>Strażnik Murków</i> to program, który ma pomóc w tych i podobnych sytuacjach. Obserwuje on spadki punktów w wybranych przez Ciebie wioskach i wnioskuje budynki zburzone podczas ataku - przede wszystkim poziom muru. Dzięki temu zawsze będziesz wiedzieć, czy wioska została wyczyszczona. A czasem dowiesz się jakie inne budynki zostały zburzone - jako wisienka na torcie!</p>
+
+<img src='s1.png'>
+
+<h2>Jak rozpocząć?</h2>
+
+<ul>
+<li>Uruchom program, wybierz opcję <i>"Dodaj wioski"</i>.</li>
+<li>Skopiuj i wklej listę wiosek do obserwowania.</li>
+<li>Zatwierdź przyciskiem <i>"Utwórz nową sesję"</i>.</li>
+<li>Program zacznie obserwować wioski i będzie na bieżąco podawał ich stan.</li>
+</ul>
+
+<img src='s2.png'>
+
+<p>Przy wklejaniu listy wiosek każdy format zawierający koordynaty jest dozwolony. Jednak istotne jest, by w każdej linii znajdowały się koordynaty tylko jednej wioski.</p>
+
+<h2>Obserwacja</h2>
+
+<p>Gdy sesja zostanie rozpoczęta, program będzie automatycznie sprawdzał wioski znajdujące się na liście i starał się wywnioskować w nich poziomy budynków. Wpisy będą aktualizować się automatycznie - średnio co 15 sekund, program będzie wybierał jedną z wiosek na liście i sprawdzał jej stan.</p>
+
+<p>Algorytm jest w stanie wnioskować poziomy trzech najczęściej uszkadzanych budynków podczas ataków, czyli muru, kuźni i zagrody. Ponadto, śledzone wioski są kolorowane na podstawie ich stanu:</p>
+
+<ul>
+<li>Jeżeli wioska posiada mur na poziomie 20, kolorowana jest na zielono.</li>
+<li>Jeżeli w wiosce mur został zburzony na niezerowy poziom, kolorowana jest na żółto.</li>
+<li>Jeżeli mur został całkowicie zburzony, wioska jest kolorowana na czerwono.</li>
+<li>Jeśli wioska jest właśnie sprawdzana lub przy sprawdzaniu wystąpił błąd, kolorowana jest na szaro.</li>
+</ul>
+
+<img src='s3.png'>
+
+<p>Może wydarzyć się sytuacja, że algorytm nie będzie w stanie przewidzieć jakie budynki zostały zburzone w wiosce, czyli spadek punktów będzie pasować to więcej niż jednej konfiguracji budynków. W takiej sytuacji system wskaże to znakiem zapytania. Poda też problematyczną różnicę punktów, by móc przynajmniej szacunkowo określić stan wioski.</p>
+
+<img src='s4.png'>
+
+<h2>Punkt startowy</h2>
+
+<p>Program działa na podstawie analizowania różnic punktów wioski w czasie. Zatem pojawia się pytanie - od którego czasu należy liczyć tę różnicę? Przy tworzeniu nowej sesji masz możliwość wyboru punktu startowego - czyli czasu, od którego program będzie liczyć różnicę punktów:</p>
+
+<ul>
+<li>Od początku dnia - program będzie brał różnicę punktów zaczynając od północy bieżącego dnia. Jest to opcja domyślna.</li>
+<li>Od tego momentu - program będzie brał różnicę punktów zaczynając dokładnie od momentu, w którym utworzyłeś sesję.</li>
+</ul>
+
+<img src='s5.png'>
+
+<p>Wybranie odpowiedniej opcji może zmienić dokładność wyników, dlatego zawsze warto zastanowić się, której z nich potrzebujemy w danej sytuacji:</p>
+
+<ul>
+<li>Przypuśćmy, że osoba, której wioskę obserwujemy, zbudowała w nocy poziom ratusza. Wtedy jeśli będziemy liczyć różnicę od początku dnia, otrzymamy przekłamane wyniki (różnica punktów będzie dodatnia, z powodu ratusza zbudowanego w nocy). Ale jeśli weźmiemy moment utworzenia sesji jako punkt startowy, felerny poziom ratusza zostanie zignorowany i algorytm będzie działał poprawnie.</li>
+<li>Załóżmy, że obserwowana wioska była już wcześniej atakowana. Wtedy jeśli przyjmiemy moment utworzenia sesji jako punkt początkowy, otrzymamy przekłamane wyniki (budynki zostały już zburzone, a algorytm weźmie ten stan jako neutralny). Ale jeśli będziemy liczyć od początku dnia, to algorytm zobaczy spadek punktów i poprawnie wywnioskuje zburzone budynki.</li>
+</ul>
+
+<p>Bywają też sytuacje, kiedy żadna z tych opcji nie jest satysfakcjonująca - w takim wypadku trzeba stan wioski poprawić samodzielnie, żeby otrzymać dokładne wyniki (patrz sekcja: <i>ręczna korekta</i>)</p>
+
+<h2>Szczegóły</h2>
+
+<p>Zawsze możesz zobaczyć szczegółowe informacje na temat danej wioski, klikając na symbol strzałki obok pozycji na liście. Rozwinie się wtedy lista z dodatkowymi opcjami.</p>
+
+<img src='s6.png'>
+
+<ul>
+<li>Ostatnia aktualizacja danych: Jak dawno temu były aktualizowane informacje na temat wioski.</li>
+<li>Początkowa ilość punktów: Ilość punktów wioski na samym początku (w punkcie startowym).</li>
+<li>Obecna ilość punktów: Ostatnio widziana ilość punktów wioski, oraz całkowita różnica punktów od początkowej ilości.</li>
+<li>Ilość zmian w punktach: Ile razy zmieniła się liczba punktów wioski, oraz ostatnia zmiana ilości punktów.</li>
+<li>Akcje: Tu możesz usunąć wioskę z listy jeżeli nie chcesz jej już obserwować, albo dokonać ręcznej poprawki (patrz sekcja: <i>ręczna korekta</i>)</li>
+</ul>
+
+<h2>Ręczna korekta</h2>
+
+<p>Niekiedy algorytm nie poradzi sobie z daną wioską, albo zachodzi potrzeba śledzenia wioski, w której budynki nie są na maksymalnym poziomie. W takiej sytuacji możesz sam pomóc maszynie, korzystając z opcji <i>popraw</i>. Będzie można ustawić znane poziomy budynków w wiosce, a algorytm weźmie je wtedy pod uwagę podczas obliczeń.</p>
+
+<img src='s7.png'>
+
+<h2>Przywracanie sesji</h2>
+
+<p>Program cały czas zapisuje informacje o kontrolowanych wioskach, zatem możesz zamknąć go w każdej chwili bez tracenia wszystkich danych.</p>
+
+<p>Gdy będziesz chciał wrócić później do swojej listy, wystarczy kliknąć opcję <i>"Przywróć poprzednią sesję"</i> w ekranie startowym. Lista wiosek i dane na ich temat zostaną przywrócone do poprzedniego stanu.</p>
+
+<img src='s8.png'>
+

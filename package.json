@@ -1,0 +1,19 @@
+{
+  "name": "twwalls",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/index.htm",
+  "author": "",
+  "window": {
+    "toolbar": false,
+    "width": 800,
+    "height": 500,
+    "icon": "app/assets/icon.png",
+    "min_width": 640,
+    "min_height": 480,
+    "title": "Strażnik Murków",
+    "position": "center"
+  },
+  "single-instance": true,
+  "chromium-args": "--disable-devtools"
+}
