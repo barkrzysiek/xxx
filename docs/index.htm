@@ -58,7 +58,7 @@ img {
 
 <img src='s3.png'>
 
-<p>Może wydarzyć się sytuacja, że algorytm nie będzie w stanie przewidzieć jakie budynki zostały zburzone w wiosce, czyli spadek punktów będzie pasować to więcej niż jednej konfiguracji budynków. W takiej sytuacji system wskaże to znakiem zapytania. Poda też problematyczną różnicę punktów, by móc przynajmniej szacunkowo określić stan wioski.</p>
+<p>Może wydarzyć się sytuacja, że algorytm nie będzie w stanie przewidzieć jakie budynki zostały zburzone w wiosce, czyli spadek punktów będzie pasować do więcej niż jednej konfiguracji budynków. W takiej sytuacji system wskaże to znakiem zapytania. Poda też problematyczną różnicę punktów, by móc przynajmniej szacunkowo określić stan wioski.</p>
 
 <img src='s4.png'>
 
@@ -68,7 +68,7 @@ img {
 
 <ul>
 <li>Od początku dnia - program będzie brał różnicę punktów zaczynając od północy bieżącego dnia. Jest to opcja domyślna.</li>
-<li>Od tego momentu - program będzie brał różnicę punktów zaczynając dokładnie od momentu, w którym utworzyłeś sesję.</li>
+<li>Od tego momentu - program będzie brał różnicę punktów zaczynając dokładnie od momentu, w którym została utworzona sesja.</li>
 </ul>
 
 <img src='s5.png'>
@@ -77,7 +77,7 @@ img {
 
 <ul>
 <li>Przypuśćmy, że osoba, której wioskę obserwujemy, zbudowała w nocy poziom ratusza. Wtedy jeśli będziemy liczyć różnicę od początku dnia, otrzymamy przekłamane wyniki (różnica punktów będzie dodatnia, z powodu ratusza zbudowanego w nocy). Ale jeśli weźmiemy moment utworzenia sesji jako punkt startowy, felerny poziom ratusza zostanie zignorowany i algorytm będzie działał poprawnie.</li>
-<li>Załóżmy, że obserwowana wioska była już wcześniej atakowana. Wtedy jeśli przyjmiemy moment utworzenia sesji jako punkt początkowy, otrzymamy przekłamane wyniki (budynki zostały już zburzone, a algorytm weźmie ten stan jako neutralny). Ale jeśli będziemy liczyć od początku dnia, to algorytm zobaczy spadek punktów i poprawnie wywnioskuje zburzone budynki.</li>
+<li>Załóżmy, że obserwowana wioska była już wcześniej atakowana. Wtedy jeśli przyjmiemy moment utworzenia sesji jako punkt początkowy, otrzymamy przekłamane wyniki (budynki zostały już zburzone, a algorytm weźmie ten stan jako neutralny). Ale jeżeli będziemy liczyć od początku dnia, to algorytm zobaczy spadek punktów i poprawnie wywnioskuje zburzone budynki.</li>
 </ul>
 
 <p>Bywają też sytuacje, kiedy żadna z tych opcji nie jest satysfakcjonująca - w takim wypadku trzeba stan wioski poprawić samodzielnie, żeby otrzymać dokładne wyniki (patrz sekcja: <i>ręczna korekta</i>)</p>
@@ -104,7 +104,7 @@ img {
 
 <h2>Przywracanie sesji</h2>
 
-<p>Program cały czas zapisuje informacje o kontrolowanych wioskach, zatem możesz zamknąć go w każdej chwili bez tracenia wszystkich danych.</p>
+<p>Program cały czas zapisuje informacje o kontrolowanych wioskach, zatem można zamknąć go w każdej chwili bez tracenia wszystkich danych.</p>
 
 <p>Gdy będziesz chciał wrócić później do swojej listy, wystarczy kliknąć opcję <i>"Przywróć poprzednią sesję"</i> w ekranie startowym. Lista wiosek i dane na ich temat zostaną przywrócone do poprzedniego stanu.</p>
 
