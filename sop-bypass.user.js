@@ -2,7 +2,7 @@
 // @name        Strażnik Murków - obejście Same Origin Policy
 // @include     https://gorski-the-great.github.io/twwalls/app/*
 // @grant       GM_xmlhttpRequest
-// @connect     pl100.plemiona.pl
+// @connect     pl133.plemiona.pl
 // @connect     pl.twstats.com
 // ==/UserScript==
 
