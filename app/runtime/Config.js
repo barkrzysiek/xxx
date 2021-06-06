@@ -4,7 +4,7 @@ Config = {};
 
 Config.VILLAGES_PER_CYCLE = 1733;
 
-Config.GAME_WORLD = "pl133";
+Config.GAME_WORLD = "pl162";
 
 Config.VILLAGE_DATABASE_URL = "https://" + Config.GAME_WORLD + ".plemiona.pl/map/village.txt";
 
